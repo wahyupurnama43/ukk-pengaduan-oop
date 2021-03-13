@@ -25,24 +25,7 @@
         <td> 4</td>
         <td>X</td>
       </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 5.0
-        </td>
-        <td>Win 95+</td>
-        <td>5</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 5.5
-        </td>
-        <td>Win 95+</td>
-        <td>5.5</td>
-        <td>A</td>
-      </tr>
+      
       </tbody>
       <tfoot>
       <tr>

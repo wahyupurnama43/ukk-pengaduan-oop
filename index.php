@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'init.php';
+// cek ada session logout atua tidak
 if(!isset($_SESSION['login']) && $_SESSION['login'] !== true){
     // header('Location: index.php');
     header('Location: login.php');
@@ -84,6 +86,15 @@ if (isset($_GET['logout'])) {
           </li>
 
           <li class="nav-item">
+            <a href="?page=petugas" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Petugas
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="?page=user" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -134,7 +145,7 @@ if (isset($_GET['logout'])) {
     <section class="content ">
       <div class="container-fluid">
           <?php if (isset($_GET['page'])): ?>
-              <?php if (file_exists($_GET['page'].".php")): ?>
+              <?php if (file_exists('views/'.$_GET['page'].".php")): ?>
                   <?php include "views/".$_GET['page'].".php" ?>
                   <?php else: ?>
                       <br>
