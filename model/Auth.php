@@ -69,6 +69,17 @@ class Auth extends Database
         }
     }
 
+    public function getBy($nik,$val)
+    {
+        $sql =  "SELECT * FROM masyarakat WHERE $val='$nik'";
+        $data = $this->db->query($sql);
+        if ($data->num_rows == 0) {
+            return $data = '';
+        }else{
+            return $data->fetch_assoc();
+        }
+    }
+
     public function register()
     {
         $nama = mysqli_escape_string($this->db,$_POST['nama']);
@@ -79,15 +90,28 @@ class Auth extends Database
         $tlp = mysqli_escape_string($this->db,$_POST['tlp']);
 
         if ($password === $repas) {
-            //insert data
-            $pass = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO masyarakat VALUES('$nik','$nama','$username','$pass','$tlp')";
-            $data = $this->db->query($sql);
-            if ($data == true) {
-                return true;
-            }else{
-                return false;
+            $data = $this->getBy($nik,'nik');
+            $data2 = $this->getBy($username,'username');
+            if ($data !== '' && $nik == $data['nik'] || $data2 !== '' && $username = $data2['username']) {
+                echo "
+                <script>
+                    alert('Data Nik atau Username Sudah Terdaftar');
+                    ducument.location.href = 'login.php';
+                </script>
+                ";
             }
+            else{
+                //insert data
+                $pass = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO masyarakat VALUES('$nik','$nama','$username','$pass','$tlp')";
+                $data = $this->db->query($sql);
+                if ($data == true) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
         }else{
             return false;
         }
