@@ -11,6 +11,7 @@ if (isset($_GET['logout'])) {
     $l = new Auth();
     $data = $l->logout();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,32 +77,38 @@ if (isset($_GET['logout'])) {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
+        <?php if (isset($_SESSION['level'])): ?>
+            <?php if ($_SESSION['level'] == '1' || $_SESSION['level'] == '0'): ?>
 
-          <li class="nav-item">
-            <a href="?page=petugas" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Petugas
-              </p>
-            </a>
-          </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?page=petugas" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    Petugas
+                  </p>
+                </a>
+              </li>
 
-          <li class="nav-item">
-            <a href="?page=user" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                User
-              </p>
-            </a>
-          </li>
+
+              <li class="nav-item">
+                <a href="?page=user" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    User
+                  </p>
+                </a>
+              </li>
+            <?php endif; ?>
+
+          <?php endif; ?>
 
           <li class="nav-item">
             <a href="?page=pengaduan" class="nav-link">
@@ -304,11 +311,14 @@ if (isset($_GET['logout'])) {
 </script>
 <!-- Bootstrap 4 -->
 <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- DataTables -->
 <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 <!-- admin lte -->
 <script src="assets/dist/js/adminlte.min.js"></script>
 <script>
@@ -317,6 +327,10 @@ if (isset($_GET['logout'])) {
       "responsive": true,
       "autoWidth": false,
     });
+  });
+  
+  $(document).ready(function () {
+    bsCustomFileInput.init();
   });
 </script>
 

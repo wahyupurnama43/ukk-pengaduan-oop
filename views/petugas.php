@@ -89,23 +89,23 @@
         <form action="" method="POST">
             <div class="form-group">
                 <label for="nama">Nama Petugas</label>
-                <input type="text" class="form-control" id="nama" placeholder="Nama Petugas" name="petugas">
+                <input type="text" class="form-control" id="nama" placeholder="Nama Petugas" required name="petugas">
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                <input type="text" class="form-control" id="username" placeholder="Username" required name="username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <input type="password" class="form-control" id="password" placeholder="Password" required name="password">
             </div>
             <div class="form-group">
                 <label for="tlp">Telpon</label>
-                <input type="number" class="form-control" id="tlp" placeholder="Telpon" name="tlp">
+                <input type="number" class="form-control" id="tlp" placeholder="Telpon" required name="tlp">
             </div>
             <div class="form-group">
                 <label for="">Level</label>
-                <select class="form-control" name="level">
+                <select class="form-control" required name="level">
                     <option value="" selected disabled>Pilih Level</option>
                     <option value="admin">Admin</option>
                     <option value="petugas">Petugas</option>

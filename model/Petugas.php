@@ -17,6 +17,8 @@ class Petugas extends Database
                 $hasil[] = $d;
             }
             return $hasil;
+        }else{
+            return $hasil = [];
         }
     }
 

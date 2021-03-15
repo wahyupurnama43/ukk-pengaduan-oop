@@ -21,35 +21,48 @@ class Auth extends Database
         $sql2 ="SELECT * FROM masyarakat WHERE username='$us'";
         $mas = $this->db->query($sql2);
 
-        if (!empty($pgs) && $pgs !== '')
+
+
+        if (!empty($pgs) && $pgs->num_rows > 0)
         {
             $data  = mysqli_fetch_assoc($pgs);
-
-            if (password_verify($pass,$data['password'])) {
-                if ($data['level'] === 'admin')
-                {
-                    $_SESSION['level'] = '1';
-                    $_SESSION['login'] = true;
-                    $_SESSION['user'] = $data['username'];
-                    header('Location: index.php');
-                }else if($data['level'] === 'petugas')
-                {
+            if ($data !== null) {
+                if (password_verify($pass,$data['password'])) {
+                    if ($data['level'] === 'admin')
+                    {
+                        $_SESSION['level'] = '1';
+                        $_SESSION['login'] = true;
+                        $_SESSION['user'] = $data['username'];
+                        header('Location: index.php');
+                    }else if($data['level'] === 'petugas')
+                    {
+                        $_SESSION['level'] = '0';
+                        $_SESSION['login'] = true;
+                        $_SESSION['user'] = $data['username'];
+                        header('Location: index.php');
+                    }else{
+                        return false;
+                    }
 
                 }else{
                     return false;
                 }
-
             }else{
                 return false;
             }
-        }else if(!empty($mas) && $mas !== '')
-        {
-            $data  = mysqli_fetch_assoc($pgs);
 
-            if (password_verify($pass,$data['password'])) {
-                $_SESSION['login'] = true;
-                $_SESSION['user'] = $data['username'];
-                header('Location: index.php');
+        }else if(!empty($mas) && $mas->num_rows > 0)
+        {
+            $data  = mysqli_fetch_assoc($mas);
+            if ($data !== null) {
+                if (password_verify($pass,$data['password'])) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['user'] = $data['username'];
+                    $_SESSION['masyarakat'] = true;
+                    header('Location: index.php');
+                }else{
+                    return false;
+                }
             }else{
                 return false;
             }
