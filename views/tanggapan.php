@@ -1,9 +1,14 @@
 <?php
 
     $t = new Tanggapan();
-    $data = $t->getData();
+    if (isset($_SESSION['level'])) {
+        if ($_SESSION['level'] == 1 || $_SESSION['level'] == 0) {
+            $data = $t->getData();
+        }
+    }else {
+        $data = $t->getDataBy($_SESSION['user']);
+    }
 
-    //
     if (isset($_GET['d-id'])) {
         $id = $_GET['d-id'];
         $delete = $pe->delete($id);
@@ -20,12 +25,7 @@
 <br>
 <div class="card ">
   <div class="card-header ">
-    <h3 class="card-title">Data Pengaduan</h3>
-    <div class="d-flex justify-content-end">
-        <?php if (isset($_SESSION['masyarakat']) && $_SESSION['masyarakat'] == true): ?>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Tambah Data </button>
-        <?php endif; ?>
-    </div>
+    <h3 class="card-title">Data Tanggapan</h3>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -46,9 +46,9 @@
               <tr>
                 <td><?php echo $i++ ?></td>
                 <td><?php echo $d['nama'] ?> </td>
-                <td><?php echo $d['nama'] ?> </td>
-                <td><?php echo $d['tgl_pengaduan'] ?></td>
-                <td><?php echo $d['nama'] ?> </td>
+                <td><?php echo $d['tanggapan'] ?> </td>
+                <td><?php echo date('d M Y', strtotime($d['tgl_pengaduan'])) ?></td>
+                <td><?php echo $d['nama_petugas'] ?> </td>
                 <td>
 
                 </td>

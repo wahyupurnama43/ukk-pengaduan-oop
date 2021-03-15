@@ -1,7 +1,13 @@
 <?php
 
     $pe = new Pengaduan();
-    $data = $pe->getData();
+    if (isset($_SESSION['level'])) {
+        if ($_SESSION['level'] == 1 || $_SESSION['level'] == 0) {
+            $data = $pe->getData();
+        }
+    }else {
+        $data = $pe->getDataBy($_SESSION['user']);
+    }
     $u = new User();
     $dataU = $u->getByUser($_SESSION['user']);
     if (isset($_POST['tambah'])) {
@@ -13,7 +19,7 @@
             </script>";
         }else{
             echo "<script>
-                alert('Nik Sudah Terdaftar');
+                alert('Data gagal Di Tambahkan');
                 window.location.href = 'index.php?page=pengaduan';
             </script>";
         }
@@ -22,6 +28,16 @@
     if (isset($_GET['d-id'])) {
         $id = $_GET['d-id'];
         $delete = $pe->delete($id);
+        if ($delete == true) {
+            echo "<script>
+                alert('Data Berhasil Di Hapus');
+                window.location.href = 'index.php?page=pengaduan';
+            </script>";
+        }
+    }
+    if (isset($_GET['u-id'])) {
+        $id = $_GET['u-id'];
+        $delete = $pe->update_delete($id);
         if ($delete == true) {
             echo "<script>
                 alert('Data Berhasil Di Hapus');
@@ -79,12 +95,15 @@
                 <td>
                     <?php if (isset($_SESSION['level'])): ?>
                         <a href="?page=detail&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary">Detail</a>
+                        <a href="?page=pengaduan&d-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
                     <?php else: ?>
-                    <?php if ($d['status'] == 'proses'): ?>
-                        <a href="?page=edit-user&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary" >Edit</a>
+                        <?php if ($d['status'] == 'proses'): ?>
+                            <a href="?page=edit-pengaduan&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary" >Edit</a>
+                        <?php else: ?>
+                            <a href="?page=detail&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary">Detail</a>
+                            <a href="?page=pengaduan&u-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
+                        <?php endif; ?>
                     <?php endif; ?>
-                    <a href="?page=pengaduan&d-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
-                <?php endif; ?>
 
                 </td>
               </tr>

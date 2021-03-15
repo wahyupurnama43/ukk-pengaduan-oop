@@ -10,6 +10,7 @@ class Auth extends Database
 
     public function login()
     {
+        
         session_start();
         // CEK AKUN di Database
         $us = mysqli_escape_string($this->db,$_POST['username']);

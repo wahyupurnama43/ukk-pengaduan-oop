@@ -74,7 +74,7 @@
                 <form action="" method="POST">
                     <div class="form-group">
                         <label for="petugas">Username Petugas</label>
-                        <input type="text" class="form-control" id="petugas" placeholder="Username Petugas" value="<?php echo $_SESSION['user'] ?>" disabled>
+                        <input type="text" class="form-control" id="petugas" placeholder="Username Petugas" value="<?= ($tanggapan == '') ?   $_SESSION['user'] : $tanggapan['nama_petugas'] ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="tanggapan">Tanggapan</label>
