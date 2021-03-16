@@ -68,7 +68,7 @@ if (isset($_GET['logout'])) {
           <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['user'] ?></a>
         </div>
       </div>
 

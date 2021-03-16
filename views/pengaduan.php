@@ -56,6 +56,9 @@
         <?php if (isset($_SESSION['masyarakat']) && $_SESSION['masyarakat'] == true): ?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Tambah Data </button>
         <?php endif; ?>
+        <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 1 || $_SESSION['level'] == 0 ): ?>
+                <a href="?page=print" target='_blank' class="btn btn-primary">Print </a>
+        <?php endif; ?>
     </div>
   </div>
   <!-- /.card-header -->
@@ -63,7 +66,7 @@
     <table id="example2" class="table table-bordered table-striped text-center">
       <thead>
       <tr>
-        <th>No</th>
+        < th>No</th>
         <th>Nama Pengaduan</th>
         <th>Laporan</th>
         <th>Tanggal</th>

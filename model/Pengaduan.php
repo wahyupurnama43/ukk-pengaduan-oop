@@ -58,18 +58,19 @@ class Pengaduan extends Database
         $nik = mysqli_escape_string($this->db,$_POST['nik']);
         $laporan = mysqli_escape_string($this->db,$_POST['laporan']);
         $date = date('Y-m-d H:i:s');
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] < 0) {
-            $name =  $_FILES['foto']['name'];
-            $type = $_FILES['foto']['type'];
-            $tmp_name = $_FILES['foto']['tmp_name'];
-            $size = $_FILES['foto']['size'];
-            $typeImg = ['jpg','png','jpeg'];
-            $e = explode('/', $type);
-            $n=explode('.', $name);
+        if (isset($_FILES['foto']) || $_FILES['foto']['error'] = 0) {
+            $name =  $_FILES['foto']['name']; //fungsi untuk nerima nama gambar
+            $type = $_FILES['foto']['type']; // ini untuk nerima tipe gambar
+            $tmp_name = $_FILES['foto']['tmp_name']; //ini untuk nerima tempat gambar
+            $size = $_FILES['foto']['size']; // ini untuk nerima size
+            $typeImg = ['jpg','png','jpeg']; // ini untuk tentuin file apa boleh inputkan
+            $e = explode('/', $type); // fungsi untuk memisahkan nama dengan type
+            $n=explode('.', $name); // fungsi untuk misahin nama dengan type
+
             $final = uniqid(rand()).'.'.$n[1];
-            if (in_array($e[1], $typeImg)) {
+            if (in_array($e[1], $typeImg)) { // ini valudasi untuk type gambar
                 // cek size
-                if ($size < 1000000) {
+                if ($size < 1000000) { // untuk mengukur size
                     // move Gambar
                     move_uploaded_file($tmp_name,'/home/wahyu/Documents/htdocs/ukk-2021/assets/gambar/'.$final);
                     // masukan data ke Database
@@ -79,10 +80,11 @@ class Pengaduan extends Database
                     echo "
                         <script>
                             alert('Gambar Terlalu Besar');
-                            document.location.href='?page=pengaduan';
+                            document.location.href='pengaduan';
                         </script>
                     ";
                 }
+
             }else{
                 echo "
                     <script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 15 Mar 2021 pada 16.21
+-- Waktu pembuatan: 16 Mar 2021 pada 22.22
 -- Versi server: 5.7.33-0ubuntu0.18.04.1
 -- Versi PHP: 7.4.14
 
@@ -40,7 +40,8 @@ CREATE TABLE `masyarakat` (
 --
 
 INSERT INTO `masyarakat` (`nik`, `nama`, `username`, `password`, `telp`) VALUES
-('28901', 'wahyu', 'wahyu', '$2y$10$bKlRv8U5H/9N4W2MLmSr3O1.edgY4r2kB9C9ctks2diYkCyeYiMXe', '098732123');
+('28901', 'wahyu', 'wahyu', '$2y$10$bKlRv8U5H/9N4W2MLmSr3O1.edgY4r2kB9C9ctks2diYkCyeYiMXe', '098732123'),
+('9021', 'pio', 'pio', '$2y$10$kfL07CWda7v5D9foGc0wguS5A1Jt1rCxr5sNR/Ej8rngRAsA2uiO6', '12312312');
 
 -- --------------------------------------------------------
 
@@ -54,15 +55,20 @@ CREATE TABLE `pengaduan` (
   `nik` char(16) NOT NULL,
   `isi_laporan` text NOT NULL,
   `foto` varchar(255) NOT NULL,
-  `status` enum('0','proses','selesai','') NOT NULL
+  `status` enum('0','proses','selesai','') NOT NULL,
+  `delete_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pengaduan`
 --
 
-INSERT INTO `pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `isi_laporan`, `foto`, `status`) VALUES
-(11, '2021-03-15 16:15:36', '28901', 'siap', '2113182500604dff411670a.png', 'selesai');
+INSERT INTO `pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `isi_laporan`, `foto`, `status`, `delete_at`) VALUES
+(11, '2021-03-16 13:47:51', '28901', 'siap', '2113182500604dff411670a.png', 'selesai', '2021-03-16 13:47:51'),
+(17, '2021-03-15 20:17:36', '9021', 'ppppp\r\n', '1348928707604f4e330423b.png', 'selesai', '2021-03-15 20:17:36'),
+(18, '2021-03-15 20:15:49', '9021', 'lll', '436590943604f4ed4c3492.png', 'selesai', '2021-03-15 20:15:49'),
+(19, '2021-03-15 20:58:53', '9021', 'okk', '1334254678604f5a0d42f09.png', 'proses', NULL),
+(20, '2021-03-16 21:46:54', '28901', 'itu pak', '19407215076050494af0add.png', 'selesai', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +112,10 @@ CREATE TABLE `tanggapan` (
 --
 
 INSERT INTO `tanggapan` (`id_tanggapan`, `id_pengaduan`, `tgl_tanggapan`, `tanggapan`, `id_petugas`) VALUES
-(1, 11, '2021-03-15 16:15:36', 'baik', 1);
+(1, 11, '2021-03-15 16:15:36', 'baik', 1),
+(5, 17, '2021-03-15 20:08:46', 'sip', 1),
+(6, 18, '2021-03-15 20:15:37', 'oke', 1),
+(7, 20, '2021-03-16 21:46:54', 'siap', 1);
 
 --
 -- Indexes for dumped tables
@@ -147,7 +156,7 @@ ALTER TABLE `tanggapan`
 -- AUTO_INCREMENT untuk tabel `pengaduan`
 --
 ALTER TABLE `pengaduan`
-  MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `petugas`
@@ -159,7 +168,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT untuk tabel `tanggapan`
 --
 ALTER TABLE `tanggapan`
-  MODIFY `id_tanggapan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tanggapan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -50,7 +50,7 @@
                 <td><?php echo date('d M Y', strtotime($d['tgl_pengaduan'])) ?></td>
                 <td><?php echo $d['nama_petugas'] ?> </td>
                 <td>
-
+                    <a href="?page=detail&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary">Detail</a>
                 </td>
               </tr>
           <?php endforeach; ?>

@@ -37,7 +37,7 @@ class Tanggapan extends Database
         $sql = "SELECT * FROM tanggapan
                 INNER JOIN pengaduan USING(id_pengaduan)
                 INNER JOIN petugas USING(id_petugas)
-                INNER JOIN masyarakat USING(nik) WHERE nik = '$nik'";
+                INNER JOIN masyarakat USING(nik) WHERE nik = '$nik' AND delete_at is null";
         $data = $this->db->query($sql);
         if ($data->num_rows > 0) {
             while ($h = $data->fetch_assoc()) {
