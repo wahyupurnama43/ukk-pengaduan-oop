@@ -56,8 +56,10 @@
         <?php if (isset($_SESSION['masyarakat']) && $_SESSION['masyarakat'] == true): ?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Tambah Data </button>
         <?php endif; ?>
-        <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 1 || $_SESSION['level'] == 0 ): ?>
-                <a href="?page=print" target='_blank' class="btn btn-primary">Print </a>
+        <?php if (isset($_SESSION['level'])): ?>
+          <?php if ( $_SESSION['level'] == 1 || $_SESSION['level'] == 0 ): ?>
+                <a href="print.php" target='_blank' class="btn btn-primary">Print </a>
+          <?php endif ?>
         <?php endif; ?>
     </div>
   </div>
@@ -66,7 +68,7 @@
     <table id="example2" class="table table-bordered table-striped text-center">
       <thead>
       <tr>
-        < th>No</th>
+        <th>No</th>
         <th>Nama Pengaduan</th>
         <th>Laporan</th>
         <th>Tanggal</th>
@@ -98,13 +100,16 @@
                 <td>
                     <?php if (isset($_SESSION['level'])): ?>
                         <a href="?page=detail&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary">Detail</a>
-                        <a href="?page=pengaduan&d-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
+                        <?php if ($_SESSION['level'] == 1): ?>
+                          <a href="?page=pengaduan&d-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
+                        <?php endif ?>
+
                     <?php else: ?>
                         <?php if ($d['status'] == 'proses'): ?>
                             <a href="?page=edit-pengaduan&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary" >Edit</a>
                         <?php else: ?>
                             <a href="?page=detail&id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-primary">Detail</a>
-                            <a href="?page=pengaduan&u-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a>
+                              <!-- <a href="?page=pengaduan&u-id=<?php echo $d['id_pengaduan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Di Hapus')">Hapus</a> -->
                         <?php endif; ?>
                     <?php endif; ?>
 

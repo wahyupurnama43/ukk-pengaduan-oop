@@ -3,9 +3,9 @@
 class Database
 {
     private $hs = 'localhost';
-    private $us = 'wahyu';
-    private $pw = 'wahyup';
-    private $db = 'ukk_pengaduan';
+    private $us = 'root';
+    private $pw = '';
+    private $db = 'ukkpengaduan';
 
     public function conn()
     {

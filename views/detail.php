@@ -37,7 +37,7 @@
                 <h5>Detail Pengadu</h5>
                 <hr>
                 <div class="text-center">
-                    <img src="../assets/gambar/<?php echo $data['foto'] ?>" alt="" width="70%">
+                    <img src="assets/gambar/<?php echo $data['foto'] ?>" alt="" width="70%">
                 </div>
                 <br>
                 <table>

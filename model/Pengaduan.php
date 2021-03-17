@@ -22,6 +22,22 @@ class Pengaduan extends Database
         return $hasil;
     }
 
+     public function getPrint()
+    {
+        $sql = "SELECT * FROM pengaduan 
+                INNER JOIN masyarakat using(nik)
+                INNER JOIN tanggapan using(id_pengaduan)";
+        $data = $this->db->query($sql);
+        if ($data->num_rows == 0) {
+            $hasil = [];
+        }else{
+            while ($h = $data->fetch_assoc()) {
+                $hasil[] = $h;
+            }
+        }
+        return $hasil;
+    }
+
     public function getBy($us)
     {
         $sql =  "SELECT nik FROM masyarakat WHERE username='$us'";
@@ -72,7 +88,8 @@ class Pengaduan extends Database
                 // cek size
                 if ($size < 1000000) { // untuk mengukur size
                     // move Gambar
-                    move_uploaded_file($tmp_name,'/home/wahyu/Documents/htdocs/ukk-2021/assets/gambar/'.$final);
+
+                    move_uploaded_file($tmp_name,'assets/gambar/'.$final);
                     // masukan data ke Database
                     $sql = "INSERT INTO `pengaduan`(`tgl_pengaduan`, `nik`, `isi_laporan`, `foto`, `status`) VALUES ('$date','$nik','$laporan','$final','proses') ";
                     return $this->db->query($sql);

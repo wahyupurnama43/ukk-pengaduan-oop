@@ -124,6 +124,6 @@ class Auth extends Database
         $_SESSION = [];
         session_destroy();
         unset($_SESSION);
-        header('Location: ../login.php');
+        header('Location: login.php');
     }
 }

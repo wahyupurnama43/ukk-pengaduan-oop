@@ -79,7 +79,6 @@ if (isset($_GET['logout'])) {
                with font-awesome or any other icon font library -->
         <?php if (isset($_SESSION['level'])): ?>
             <?php if ($_SESSION['level'] == '1' || $_SESSION['level'] == '0'): ?>
-
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon fas fa-home"></i>
@@ -88,6 +87,8 @@ if (isset($_GET['logout'])) {
                   </p>
                 </a>
               </li>
+              <?php if ($_SESSION['level'] === '1'): ?>
+                
               <li class="nav-item">
                 <a href="?page=petugas" class="nav-link">
                   <i class="nav-icon fas fa-user"></i>
@@ -96,8 +97,7 @@ if (isset($_GET['logout'])) {
                   </p>
                 </a>
               </li>
-
-
+              <?php endif ?>
               <li class="nav-item">
                 <a href="?page=user" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
